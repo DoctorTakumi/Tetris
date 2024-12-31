@@ -1,0 +1,30 @@
+import pygame
+
+# Game size
+COLUMNS = 10
+ROWS = 20
+CELL_SIZE = 40 # pixels
+GAME_WIDTH, GAME_HEIGHT = COLUMNS * CELL_SIZE, ROWS * CELL_SIZE
+
+# side bar size
+SIDEBAR_WIDTH = 200 # pixels
+PREVIEW_HEIGHT_FRACTION = 0.7 # 70% of the height
+SCORE_HEIGHT_FRACTION = 1 - PREVIEW_HEIGHT_FRACTION # remainder 100%-70%
+
+# window
+PADDING = 20
+WINDOW_WIDTH = GAME_WIDTH + SIDEBAR_WIDTH + PADDING * 3 # 3 paddinga
+WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2 # 2 paddinga
+
+
+
+# Colors
+YELLOW = '#f1e60d'
+RED = '#e51b20'
+BLUE = '#204b9b'
+GREEN = '#65b32e'
+PURPLE = '#7b217f'
+CYAN = '#6cc6d9'
+ORANGE = '#f07e13'
+GRAY = '#1C1C1C'
+LINE_COLOR = '#FFFFFF'
