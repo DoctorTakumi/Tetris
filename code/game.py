@@ -35,6 +35,8 @@ class Game:
         self.timers['vertical move'].activate()
         
     def create_new_tetromino(self):
+        
+        self.check_finished_rows()
         self.tetromino = Tetromino(
             choice(list(TETROMINOS.keys())), 
             self.sprites, 
@@ -72,6 +74,32 @@ class Game:
                 self.tetromino.move_horizontal(1)
                 self.timers['horizontal move'].activate()
     
+    def check_finished_rows(self):
+        
+        # getting the full row indexes
+        delete_rows = []
+        for i, row in enumerate(self.field_data):
+            if all(row):
+                delete_rows.append(i)
+                
+        if delete_rows:
+            for delete_row in delete_rows:
+                
+                # delete full rows
+                for block in self.field_data[delete_row]:
+                    block.kill()
+                    
+                # move down blocks
+                for row in self.field_data:
+                    for block in row:
+                        if block and block.pos.y < delete_row:
+                            block.pos.y += 1
+                            
+            # rebuilding the field data
+            self.field_data = [[0 for x in range(COLUMNS)] for y in range(ROWS)]
+            for block in self.sprites:
+                self.field_data[int(block.pos.y)][int(block.pos.x)] = block
+    
     def run(self):
         
         # update
@@ -86,6 +114,7 @@ class Game:
         self.draw_grid()
         self.display_surface.blit(self.surface, (PADDING, PADDING)) # blit - block image transfer
         pygame.draw.rect(self.display_surface, LINE_COLOR, self.rect, 2, 2)
+
         
 class Tetromino:
     def __init__(self, shape, group, create_new_tetromino, field_data):
