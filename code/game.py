@@ -183,7 +183,7 @@ class Tetromino:
                     return
                 
                 # vertical/floor check
-                if pos.y >= ROWS-1:
+                if pos.y >= ROWS-1: # maybe remove -1 if buggy, also place vertical heck below field check if necessary
                     return
                 
                 # field check -> collision with other pieces
