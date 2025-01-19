@@ -1,5 +1,6 @@
 from settings import *
 from random import choice
+from sys import exit
 
 from timer import Timer # from timer.py importing Timer class
 
@@ -59,8 +60,13 @@ class Game:
             self.timers['vertical move'].duration = self.down_speed
         self.update_score(self.current_lines, self.current_score, self.current_level)
         
-    def create_new_tetromino(self):
+    def check_game_over(self):
+        for block in self.tetromino.blocks:
+            if block.pos.y <0:
+                exit()
         
+    def create_new_tetromino(self):
+        self.check_game_over()
         self.check_finished_rows()
         self.tetromino = Tetromino(
             self.get_next_shape(), 
