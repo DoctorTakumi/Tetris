@@ -1,5 +1,6 @@
 from settings import *
 from sys import exit
+from os.path import join, abspath, dirname
 
 # components
 from game import Game # from game.py importing Game class
@@ -25,6 +26,14 @@ class Main:
         self.game = Game(self.get_next_shape, self.update_score)
         self.score = Score()
         self.preview = Preview()
+        
+        # audio
+        # Get the absolute path to the 'sound' folder
+        sound_dir = abspath(join(dirname(__file__), '..', 'sound'))
+        # Load the music file
+        self.music = pygame.mixer.Sound(join(sound_dir, 'music.wav'))
+        self.music.set_volume(0.05) # set volume in range (0,1)
+        self.music.play(-1) # -1 for the music infinite loop
         
     def update_score(self, lines, score, level):
         self.score.lines = lines

@@ -17,7 +17,7 @@ WINDOW_WIDTH = GAME_WIDTH + SIDEBAR_WIDTH + PADDING * 3 # 3 paddinga
 WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2 # 2 paddinga
 
 # game behaviour
-UPDATE_START_SPEED = 200 # revert to 600 after testing
+UPDATE_START_SPEED = 600 # revert to 600 after testing # 200 for testing purposes
 MOVE_WAIT_TIME =  200
 ROTATE_WAIT_TIME = 200
 BLOCK_OFFSET = pygame.Vector2(COLUMNS // 2, -1) # put // 2, -1 to position a shape above the game (offscreen)

@@ -1,6 +1,7 @@
 from settings import *
 from random import choice
 from sys import exit
+from os.path import join, abspath, dirname
 
 from timer import Timer # from timer.py importing Timer class
 
@@ -48,6 +49,13 @@ class Game:
         self.current_score = 0
         self.current_lines = 0
         
+        # audio
+        # Get the absolute path to the 'sound' folder
+        sound_dir = abspath(join(dirname(__file__), '..', 'sound'))
+        # Load the music file
+        self.landing_sound = pygame.mixer.Sound(join(sound_dir, 'landing.wav'))
+        self.landing_sound.set_volume(0.1)
+        
     def calculate_score(self, num_lines):
         self.current_lines += num_lines
         self.current_score += SCORE_DATA[num_lines] * self.current_level
@@ -66,6 +74,7 @@ class Game:
                 exit()
         
     def create_new_tetromino(self):
+        self.landing_sound.play()
         self.check_game_over()
         self.check_finished_rows()
         self.tetromino = Tetromino(
